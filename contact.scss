@@ -1,0 +1,451 @@
+// インポート //
+@import "variable";
+
+// ミックスイン //
+@mixin btm($color) {
+  color: #fff;
+  background-color: $color;
+  width: 160px;
+  line-height: 36px;
+  font-size: 1.2rem;
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  margin: 40px auto 0;
+
+  &:hover {
+    opacity: 0.6;
+    transition: .3s;
+  }
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
+  color: #333;
+
+  @media screen and (max-width: 768px) {
+    font-size: 1.4rem;
+  }
+}
+
+img,
+svg {
+  width: 100%;
+  vertical-align: bottom;
+}
+
+a {
+  text-decoration: none;
+}
+
+form {
+  display: block;
+}
+
+input {
+  width: 100%;
+}
+
+textarea {
+  width: 100%;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  appearance: none;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  list-style: none;
+}
+
+// label {
+//   cursor: default;
+// }
+
+// ここからヘッダー //
+// タイトルとハンバーガーメニューをdisplay:flex //
+.flex-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// タイトルとハンバーガーメニューをdisplay:flex 終了 //
+.header_box {
+  padding: 2% 4%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 5;
+
+  @media screen and (max-width: 768px) {
+    padding: 4% 4%;
+  }
+
+  .header_title {
+    width: 260px;
+    top: 38px;
+    left: 4vw;
+    z-index: 1;
+
+    &:hover {
+      opacity: 0.8;
+      transition: .3s;
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 180px;
+      top: 21px;
+    }
+  }
+
+  // ハンバーガーリスト 隠してるやつ //
+  .header_nav {
+    // display: none;
+    font-weight: bold;
+    font-size: 2rem;
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin-right: -700px;
+    height: 100vh;
+    width: 36.1vw;
+    text-align: center;
+    padding: 120px 0 0;
+    background-color: rgba(34, 34, 34, .95);
+    z-index: 2;
+
+    @media screen and (max-width: 768px) {
+      width: 67.7vw;
+    }
+
+    .nav_item {
+      margin-bottom: 30px;
+      color: white;
+
+      &:hover {
+        opacity: 0.8;
+        transition: .3s;
+      }
+    }
+  }
+}
+
+// タイトルsvgスクロール //
+.header_title.black svg path {
+  fill: #333;
+  transition: fill .3s;
+}
+
+// ハンバーガーメニュー （ハンバーガー閉じている時） //
+.burger-btn {
+  display: block;
+  right: 4vw;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+
+  @media screen and (max-width: 768px) {
+    top: 14px;
+  }
+
+  .bar {
+    display: block;
+    height: 3px;
+    width: 28px;
+    background-color: #fff;
+  }
+
+  .bar_top {
+    margin-bottom: 8px;
+  }
+
+  .bar_mid {
+    margin-bottom: 8px;
+  }
+
+  .menu {
+    display: inline-block;
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: bold;
+    padding-left: 6px;
+  }
+}
+
+// ハンバーガーメニュー （ハンバーガー閉じている時）　終了 //
+
+// ハンバーガーメニュー開いた時 //
+.burger-btn.active .bar_top {
+  transform: rotate(45deg) translate(8px, 8px);
+  transition: .3s;
+}
+
+.burger-btn.active .bar_mid {
+  opacity: 0;
+  transition: .3s;
+}
+
+.burger-btn.active .bar_bottom {
+  transform: rotate(-45deg) translate(8px, -8px);
+  transition: .3s;
+}
+
+// 背景を黒にする //
+.burger-musk {
+  display: none;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, .5);
+  z-index: 1;
+}
+
+// ハンバーガーメニュー開いている時、スクロールができないようにする //
+body.noscroll {
+  overflow: hidden;
+}
+
+.burger-btn.black .bar {
+  background-color: #333;
+  transition: background-color .3s;
+}
+
+.burger-btn.black .menu {
+  color: #333;
+  transition: color .3s;
+}
+
+// ハンバーガーメニュー開いた時 終了 //
+
+// 会議する人たちと黒背景 //
+.fv {
+  height: 60vh;
+  min-height: 450px;
+
+  // 黒画像 //
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #222;
+    width: 50%;
+    height: 60vh;
+    min-height: 450px;
+    z-index: -1;
+  }
+
+  // 人間画像 //
+  .main_img {
+    background-image: url(images/heading-img_contact.jpg);
+    height: 86%;
+    width: 76.4%;
+    background-size: cover;
+    background-position: center 0;
+    position: relative;
+  }
+
+  .main_title {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(50%, -50%);
+    color: #fff;
+
+    @media screen and (max-width: 768px) {
+      right: -15%;
+      transform: translate(0,-50%);
+    }
+  }
+
+  .main_word {
+    font-size: 2rem;
+    margin-bottom: 4px;
+
+    @media screen and (max-width: 768px) {
+      font-weight: bold;
+    }
+  }
+
+  .main_word-3 {
+    font-size: 7.2rem;
+    line-height: 1.2;
+    font-weight: bold;
+
+    @media screen and (max-width: 768px) {
+      font-size: 5.2rem;
+    }
+  }
+}
+
+// コンタクトフォーム ここから //
+.contact_wrapper {
+  padding: 120px 0;
+
+  @media screen and (max-width: 768px) {
+    padding: 80px 0;
+  }
+
+  .contact_contents-wrapper {
+    max-width: 700px;
+    padding: 0 30px;
+    margin: 0 auto;
+
+    @media screen and (max-width: 768px) {
+      padding: 0 4vw;
+    }
+
+    .lines {
+      line-height: 1.5;
+    }
+
+    .contact_word {
+      margin-bottom: 50px;
+    }
+  }
+}
+
+
+// 種別 //
+.form_item {
+  margin-bottom: 40px;
+
+  li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+  }
+
+  .form_item-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .form_item-word {
+    display: inline-block;
+    background-color: #333;
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 2px 5px;
+    margin-left: 6px;
+  }
+
+  .form_button-list {
+    display: flex;
+    align-items: center;
+
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+      align-items: flex-start;
+      padding-left: 14px;
+    }
+
+    input{
+      resize: none;
+      appearance: none;
+      -webkit-appearance: none;
+      outline: none;
+      border: none;
+      width: 100%;
+    }
+
+    .form_button-item {
+      margin-right: 50px;
+
+      @media screen and (max-width: 768px) {
+        margin-bottom: 10px;
+      }
+
+      .radio_button {
+        width: 20px;
+        height: 20px;
+        border: solid 1px #333;
+        border-radius: 50%;
+        vertical-align: -4px;
+
+        &:checked {
+            background-color: #333;
+            border: 4px solid #fff;
+            box-shadow: 0 0 0 1px #333;
+        }
+      }
+
+    }
+  }
+
+  
+
+  .text-box {
+    border: 1px solid #333;
+    color: #333;
+    padding: 10px;
+    display: block;
+    box-sizing: border-box;
+  }
+}
+
+.form_policy {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.form_policy-word {
+  padding: 10px;
+  height: 230px;
+  border: 1px solid #333;
+  overflow: scroll;
+  margin-bottom: 40px;
+  line-height: 1.5;
+}
+
+.confirm {
+  text-align: center;
+
+  .checkbox {
+    border: 1px solid #333;
+    margin-right: 8px;
+    width: 18px;
+    height: 18px;
+    vertical-align: -3px;
+  }
+
+  label {
+    cursor: default;
+  }
+}
+
+.submit-btn {
+  @include btm($btn);
+}
+
+// footer  ここから//
+.footer {
+  line-height: 50px;
+  background-color: #525252;
+  text-align: center;
+  color: #fff;
+  font-size: 1rem;
+
+  small {
+    font-size: smaller;
+  }
+}

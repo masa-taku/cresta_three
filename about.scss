@@ -1,0 +1,544 @@
+// インポート //
+@import "variable";
+
+// ミックスイン //
+@mixin btm($color) {
+  color: #fff;
+  background-color: $color;
+  width: 160px;
+  line-height: 36px;
+  font-size: 1.2rem;
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 30px;
+
+  &:hover {
+    opacity: 0.6;
+    transition: .3s;
+  }
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
+  color: #333;
+
+  @media screen and (max-width: 768px) {
+    font-size: 1.4rem;
+  }
+}
+
+img,
+svg {
+  width: 100%;
+  vertical-align: bottom;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  appearance: none;
+}
+
+dt {
+  display: block;
+}
+
+dd {
+  display: block;
+  margin-inline-start: 40px;
+}
+
+dl {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+// ここからヘッダー //
+// タイトルとハンバーガーメニューをdisplay:flex //
+.flex-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// タイトルとハンバーガーメニューをdisplay:flex 終了 //
+.header_box {
+  padding: 2% 4%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 5;
+
+  @media screen and (max-width: 768px) {
+    padding: 4% 4%;
+  }
+
+  .header_title {
+    width: 260px;
+    top: 38px;
+    left: 4vw;
+    z-index: 1;
+
+    &:hover {
+      opacity: 0.8;
+      transition: .3s;
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 180px;
+      top: 21px;
+    }
+  }
+
+  // ハンバーガーリスト 隠してるやつ //
+  .header_nav {
+    font-weight: bold;
+    font-size: 2rem;
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin-right: -700px;
+    height: 100vh;
+    width: 36.1vw;
+    text-align: center;
+    padding: 120px 0 0;
+    background-color: rgba(34, 34, 34, .95);
+    z-index: 2;
+
+    @media screen and (max-width: 768px) {
+      width: 67.7vw;
+    }
+
+    .nav_item {
+      margin-bottom: 30px;
+      color: white;
+
+      &:hover {
+        opacity: 0.8;
+        transition: .3s;
+      }
+    }
+  }
+}
+
+// タイトルsvgスクロール //
+.header_title.black svg path {
+  fill: #333;
+  transition: fill .3s;
+}
+
+// ハンバーガーメニュー （ハンバーガー閉じている時） //
+.burger-btn {
+  display: block;
+  right: 4vw;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+
+  @media screen and (max-width: 768px) {
+    top: 14px;
+  }
+
+
+  .bar {
+    display: block;
+    height: 3px;
+    width: 28px;
+    background-color: #fff;
+  }
+
+  .bar_top {
+    margin-bottom: 8px;
+  }
+
+  .bar_mid {
+    margin-bottom: 8px;
+  }
+
+  .menu {
+    display: inline-block;
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: bold;
+    padding-left: 6px;
+  }
+}
+
+// ハンバーガーメニュー （ハンバーガー閉じている時）　終了 //
+
+// ハンバーガーメニュー開いた時 //
+.burger-btn.active .bar_top {
+  transform: rotate(45deg) translate(8px, 8px);
+  transition: .3s;
+}
+
+.burger-btn.active .bar_mid {
+  opacity: 0;
+  transition: .3s;
+}
+
+.burger-btn.active .bar_bottom {
+  transform: rotate(-45deg) translate(8px, -8px);
+  transition: .3s;
+}
+
+// 背景を黒にする //
+.burger-musk {
+  display: none;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, .5);
+  z-index: 1;
+}
+
+// ハンバーガーメニュー開いている時、スクロールができないようにする //
+body.noscroll {
+  overflow: hidden;
+}
+
+.burger-btn.black .bar {
+  background-color: #333;
+  transition: background-color .3s;
+}
+
+.burger-btn.black .menu {
+  color: #333;
+  transition: color .3s;
+}
+
+// ハンバーガーメニュー開いた時 終了 //
+
+// 人間と黒背景 //
+.fv {
+  height: 60vh;
+  min-height: 450px;
+
+  // 黒画像 //
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #222;
+    width: 50%;
+    height: 60vh;
+    min-height: 450px;
+    z-index: -1;
+  }
+
+  // 人間画像 //
+  .main_img {
+    background-image: url(images/heading-img_about.jpg);
+    height: 86%;
+    width: 76.4%;
+    background-size: cover;
+    background-position: center 0;
+    position: relative;
+  }
+
+  .main_title {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(50%, -50%);
+    color: #fff;
+
+    @media screen and (max-width: 768px) {
+      font-size: 5.2rem;
+      transform: translate(30%,-50%);
+    }
+  }
+
+  .main_word {
+    font-size: 2rem;
+    margin-bottom: 4px;
+    
+    @media screen and (max-width: 768px) {
+      font-weight: bold;
+    }
+  }
+
+  .main_word-2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  .main_word-3 {
+    font-size: 7.2rem;
+    line-height: 1.2;
+    font-weight: bold;
+    margin-bottom: 4px;
+
+    @media screen and (max-width: 768px) {
+      font-size: 5.2rem;
+    }
+  }
+}
+
+// VISION ここから //
+.section_wrapper {
+  padding: 60px 0;
+
+  &:first-of-type {
+    padding-top: 120px;
+  }
+
+  @media screen and (max-width: 768px) {
+    padding: 40px 0;
+  }
+
+  @media screen and (max-width: 768px) {
+    &:first-of-type {
+      padding-top: 80px;
+    }
+  }
+
+  
+
+  .contents-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 30px;
+
+    @media screen and (max-width: 768px) {
+      padding: 0 4vw;
+    }
+  }
+
+  .section_about-img {
+    background-image: url(images/about-img.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 90px 0 90px 50px;
+    position: relative;
+  }
+
+  .vision_wrapper {
+    padding-left: 15.7vw;
+
+    @media screen and (max-width: 480px) {
+      padding-left: 0;
+    }
+  }
+
+  .section_about-title {
+    font-size: 3.2rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+
+  .vision_word {
+    font-size: 2.4rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+
+  .vision_word-1 {
+    font-weight: bold;
+  }
+
+  .lines {
+    line-height: 2;
+  }
+
+}
+
+// Ceo massage ここから //
+// 背景のグレー色 //
+.gray-bg {
+  background-color: #f2f2f2;
+}
+
+.section_wrapper-1 {
+  padding: 60px 0;
+
+  @media screen and (max-width: 768px) {
+    padding: 40px 0;
+  }
+
+  .contents-wrapper-Ceomassage {
+    max-width: 1100px;
+    padding: 0 30px;
+    margin: 0 auto;
+
+    @media screen and (max-width: 768px) {
+      padding: 0 4vw;
+    }
+  }
+
+  .relative {
+    position: relative;
+    padding-top: 150px;
+
+    @media screen and (max-width: 768px) {
+      padding-top: 120px;
+    }
+  }
+
+  .Ceomassage_wrapper {
+    width: 840px;
+    max-width: 70%;
+    margin-left: auto;
+    padding: 120px 0 60px;
+
+    @media screen and (max-width: 480px) {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  .Ceomassage_inner {
+    max-width: 400px;
+    padding: 0 30px;
+    margin: 0 auto;
+
+    .Ceomassage_about-title {
+      font-size: 3.2rem;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .Ceomassage_word-1 {
+      font-weight: bold;
+    }
+
+    .lines {
+      line-height: 2;
+    }
+  }
+
+  .Ceomassage_img {
+    width: 36.4%;
+    position: absolute;
+    top: 0;
+    left: 30px;
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+      max-width: 320px;
+    }
+
+    @media screen and (max-width: 480px) {
+      max-width: 90%;
+      left: 0;
+    }
+
+    @media screen and (max-width: 480px) {
+      img {
+        max-width: 90%;
+        left: 0;
+      }
+    }
+
+  }
+}
+
+//  Company ここから //
+.section_wrapper-Company {
+  padding: 60px 0;
+
+  &:last-of-type {
+    padding-bottom: 120px;
+  }
+
+  @media screen and (max-width: 768px) {
+    padding: 40px 0;
+  }
+
+  @media screen and (max-width: 768px) {
+    &:last-of-type {
+      padding-bottom: 80px;
+    }
+  }
+
+  .contents-wrapper-Company {
+    max-width: 1100px;
+    padding: 0 30px;
+    margin: 0 auto;
+
+    @media screen and (max-width: 768px) {
+      padding: 0 4vw;
+    }
+
+    .Company_title {
+      font-size: 3.2rem;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .dl_Company {
+      border-top: 1px solid #ddd;
+      margin-bottom: 40px;
+
+    }
+
+    .dl_Company>div {
+      display: flex;
+      padding: 20px 0;
+      max-width: 800px;
+      margin-left: auto;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .dl_Company-info {
+      font-weight: bold;
+      flex-basis: 142px;
+    }
+
+    .section_map {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-top: 32.7%;
+
+      @media screen and (max-width: 480px) {
+        padding-top: 140%;
+      }
+
+      iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+// footer  ここから//
+.footer {
+  line-height: 50px;
+  background-color: #525252;
+  text-align: center;
+  color: #fff;
+  font-size: 1rem;
+
+  small {
+    font-size: smaller;
+  }
+}
